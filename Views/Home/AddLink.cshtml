@@ -1,0 +1,17 @@
+@{
+    ViewData["Title"] = "Publier un lien";
+}
+<section class="vh-100 bg-image" style="background-color: #d9faf5;">
+<h3 class="text-dark">Bienvenue, <span class="text-warning">@ViewBag.Username!</span></h3>
+<div class="container mt-3">
+ <form action="/Home/SaveLink" method="post">
+    <div class="mb-3 mt-3">
+      <label for="lien">Lien:</label><br/>
+      <input class="form-control" type="url" name="lien" id="lien" maxlength="100"><br/><br/>
+      <label  for="description">Description:</label><br/>
+      <textarea class="form-control" rows="5" id="comment" name="description" id="description"></textarea>
+    </div>
+    <input class="btn btn-primary" type="submit" value="Soumettre">
+  </form>
+</div>
+</section>

@@ -1,0 +1,36 @@
+@{
+    ViewData["Title"] = "Mes liens";
+}
+@model IEnumerable<ProjetReddit.Models.Post>;
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col-6">Mes liens</th>
+            <th scope="col">Commentaires</th>
+            <th scope="col">UpVote</th>
+            <th scope="col">DownVote</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <div >
+                        <a href="/Home/Link?linkId=@item.Id" class="d-block text-truncate" style="max-width: 550px;">@item.Descript</a>                       
+                        Auteur: @item.User.UserName<br>
+                        Date de publication : @item.PublicationDate<br>
+                    </div>
+                </td>
+                <td>@item.Comments.Count</td>
+                <td>@item.UpVote</td>
+                <td>@item.DownVote</td>
+                <td><a href="/Home/RemoveLink?linkToRemoveId=@item.Id"><img src="~/media\remove-icon.ico" alt="" width="20"
+                        height="20"></a></td>
+            </tr>
+        }
+
+    </tbody>
+</table>

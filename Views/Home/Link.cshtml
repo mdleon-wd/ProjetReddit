@@ -1,0 +1,52 @@
+@{
+    ViewData["Title"] = "Lien";
+}
+@model ProjetReddit.Models.Post;
+
+
+<h3 class="text-dark">Bienvenue, <span class="text-warning">@ViewBag.Username!</span></h3>
+<form class="form-control">
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col-6">
+                Auteur: @Model.User.UserName <br>
+                Date de publication : @Model.PublicationDate
+            </th>
+            <th scope="col">Commentaires</th>
+            <th scope="col">UpVote</th>
+            <th scope="col">DownVote</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="@Model.Link" class="d-block text-truncate" style="max-width: 550px;">@Model.Link</a></td>
+            <td>@Model.Comments.Count</td>
+            <td>@Model.UpVote</td>
+            <td>@Model.DownVote</td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <p class="lh-base">@Model.Descript</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</form>
+<div class="text-center">
+    <a href="/Home/Vote?postId=@Model.Id&type=up"><img src="~/media/Thumbs-up-icon.png" alt="" width="50" height="50"></a>
+    <a href="/Home/Vote?postId=@Model.Id&type=down"><img src="~/media/Thumbs-down-icon.png" alt="" width="50" height="50"></a>
+</div>
+<form action="/Home/SaveComment" method="post">
+    <input type="hidden" name="postid" value="@Model.Id">
+    <label class="mt-3" for="comment"><b>Commentaire</b></label>
+    <textarea class="form-control" name="description" id="description" maxlength="200"></textarea><br>
+    <input class="btn btn-primary text-center" type="submit" value="Soumettre">
+</form>
+
+
+@foreach (var item in Model.Comments)
+{
+    <p class="mt-5"><b>@item.User.UserName a publié à @item.PublicationDate</b></p>
+    <p>@item.Description</p>
+}
